@@ -1,5 +1,7 @@
 package fr.lesaffrefreres.rh.minibodet.model;
 
+import javafx.beans.property.StringProperty;
+
 import java.time.DayOfWeek;
 
 public interface Employee {
@@ -11,6 +13,10 @@ public interface Employee {
     public String getLastName();
 
     public String getFirstName();
+
+    public StringProperty FirstNameProperty();
+
+    public StringProperty LastNameProperty();
 
     public void setCalendar(int year);
 

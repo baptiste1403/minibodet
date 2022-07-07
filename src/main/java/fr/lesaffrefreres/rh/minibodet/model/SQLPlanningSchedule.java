@@ -70,7 +70,7 @@ public class SQLPlanningSchedule implements WorkSchedule{
             ps.setLong(2, idSchedulePlanning);
             ps.executeUpdate();
             ps.close();
-            bufferedNightHours = th;
+            bufferedTotalHours = th;
         } catch(SQLException se) {
             se.printStackTrace();
         }

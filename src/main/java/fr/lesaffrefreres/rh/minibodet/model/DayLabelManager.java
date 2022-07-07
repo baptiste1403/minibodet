@@ -14,9 +14,9 @@ public interface DayLabelManager {
 
     public void removeDayLabelById(long id);
 
-    public void setDayLabelText(int id, String txt);
+    public void setDayLabelText(long id, String txt);
 
-    public void setDayLabelColor(int id, Color c);
+    public void setDayLabelColor(long id, Color c);
 
     public boolean labelExist(long id);
 

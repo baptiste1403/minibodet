@@ -20,4 +20,8 @@ public class CalendarEvent extends Event {
         super(source, target, eventType);
         date = ld;
     }
+
+    public LocalDate getSelectedDate() {
+        return date;
+    }
 }

@@ -1,25 +1,18 @@
 package fr.lesaffrefreres.rh.minibodet.model;
 
+import javafx.beans.property.*;
 import javafx.scene.paint.Color;
 
 import java.util.Objects;
 
-public class DayLabel {
-    protected String text;
-    protected Color color;
+public interface DayLabel {
 
-    public DayLabel(String txt, Color c) {
-        Objects.requireNonNull(txt);
-        Objects.requireNonNull(c);
-        text = txt;
-        color = c;
-    }
+    public String getText();
 
-    public String getText() {
-        return text;
-    }
+    public Color getColor();
 
-    public Color getColor() {
-        return color;
-    }
+    @Override
+    public String toString();
+
+    public ReadOnlyProperty<String> textProperty();
 }

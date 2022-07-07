@@ -1,13 +1,17 @@
 package fr.lesaffrefreres.rh.minibodet.model;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.sql.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class SQLEmployee implements Employee, SQLObject{
 
-    private String bufferedLastname;
-    private String bufferedFirstname;
+    private StringProperty bufferedLastname;
+    private StringProperty bufferedFirstname;
 
     private SQLPlanning planning;
     private SQLWorkCalendar calendar;
@@ -19,6 +23,8 @@ public class SQLEmployee implements Employee, SQLObject{
             throw new IllegalArgumentException("given id must be greater or equal to 0 and must match the id of an existing employee in DB");
         }
         idEmployee = id;
+        bufferedLastname = new SimpleStringProperty();
+        bufferedFirstname = new SimpleStringProperty();
         updateBuffer();
     }
 
@@ -32,8 +38,8 @@ public class SQLEmployee implements Employee, SQLObject{
             if(rs.first()) {
                 planning = new SQLPlanning(rs.getLong(4));
                 calendar = new SQLWorkCalendar(rs.getLong(1), this,  LocalDate.now().getYear());
-                bufferedFirstname = rs.getString(2);
-                bufferedLastname = rs.getString(3);
+                bufferedFirstname.set(rs.getString(2));
+                bufferedLastname.set(rs.getString(3));
             } else {
                 ps.close();
                 throw new IllegalArgumentException("the given id doesn't exist in DB");
@@ -45,8 +51,10 @@ public class SQLEmployee implements Employee, SQLObject{
     }
 
     public SQLEmployee(String fn, String ln) {
-        bufferedLastname = ln;
-        bufferedFirstname = fn;
+        bufferedFirstname = new SimpleStringProperty();
+        bufferedLastname = new SimpleStringProperty();
+        bufferedLastname.set(Objects.requireNonNull(ln));
+        bufferedFirstname.set(Objects.requireNonNull(fn));
 
         Connection conn = DataBase.getInstance().getConnection();
         try {
@@ -137,7 +145,7 @@ public class SQLEmployee implements Employee, SQLObject{
 
     @Override
     public void setLastName(String ln) {
-        bufferedLastname = ln;
+        bufferedLastname.set(ln);
         Connection conn = DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
@@ -153,7 +161,7 @@ public class SQLEmployee implements Employee, SQLObject{
 
     @Override
     public void setFirstName(String fn) {
-        bufferedFirstname = fn;
+        bufferedFirstname.set(fn);
         Connection conn = DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
@@ -169,12 +177,22 @@ public class SQLEmployee implements Employee, SQLObject{
 
     @Override
     public String getLastName() {
-        return bufferedLastname;
+        return bufferedLastname.get();
     }
 
     @Override
     public String getFirstName() {
+        return bufferedFirstname.get();
+    }
+
+    @Override
+    public StringProperty FirstNameProperty() {
         return bufferedFirstname;
+    }
+
+    @Override
+    public StringProperty LastNameProperty() {
+        return bufferedLastname;
     }
 
     @Override
@@ -244,6 +262,6 @@ public class SQLEmployee implements Employee, SQLObject{
 
     @Override
     public String toString() {
-        return bufferedFirstname + " " + bufferedLastname;
+        return bufferedFirstname.get() + " " + bufferedLastname.get();
     }
 }

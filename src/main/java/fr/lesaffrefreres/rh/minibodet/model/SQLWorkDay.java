@@ -14,14 +14,18 @@ public class SQLWorkDay extends SQLDay implements WorkDay, SQLObject{
     private String bufferedComment;
     private SQLWorkSchedule schedule;
 
-    public SQLWorkDay(long id) {
+    private SQLWorkCalendar parent;
+
+    public SQLWorkDay(SQLWorkCalendar calendar, long id) {
         super(id);
+        parent = calendar;
     }
 
-    public SQLWorkDay(LocalDate date, long idc, String com) {
+    public SQLWorkDay(SQLWorkCalendar calendar, LocalDate date, long idc, String com) {
         super(date, idc);
         bufferedComment = com;
         schedule = new SQLWorkSchedule(this, -1);
+        parent = calendar;
     }
 
     @Override
@@ -121,6 +125,7 @@ public class SQLWorkDay extends SQLDay implements WorkDay, SQLObject{
             se.printStackTrace();
         }
 
+        parent.createdDay(this);
         return idDay;
     }
 }

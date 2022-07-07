@@ -1,5 +1,6 @@
 package fr.lesaffrefreres.rh.minibodet.model;
 
+import fr.lesaffrefreres.rh.minibodet.controller.extractor.EmployeeExtractor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -25,7 +26,7 @@ public class SQLEmployeeManager implements EmployeeManager<Employee>{
     private static SQLCalendar calendar;
 
     protected SQLEmployeeManager() {
-        employees = FXCollections.observableArrayList();
+        employees = FXCollections.observableArrayList(new EmployeeExtractor());
         Connection conn = DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
@@ -81,7 +82,7 @@ public class SQLEmployeeManager implements EmployeeManager<Employee>{
         return null;
     }
 
-    private boolean employeeExist(String firstName, String lastName) {
+    public boolean employeeExist(String firstName, String lastName) {
         for(Employee cur : employees) {
             if(cur.getFirstName().equals(firstName) && cur.getLastName().equals(lastName)) {
                 return true;

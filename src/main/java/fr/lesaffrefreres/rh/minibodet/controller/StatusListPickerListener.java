@@ -1,7 +1,6 @@
 package fr.lesaffrefreres.rh.minibodet.controller;
 
 import fr.lesaffrefreres.rh.minibodet.model.SQLDayLabelManager;
-import fr.lesaffrefreres.rh.minibodet.model.SimpleDayLabelManager;
 import fr.lesaffrefreres.rh.minibodet.view.CalendarView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

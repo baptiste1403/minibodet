@@ -12,27 +12,28 @@
 <?import javafx.scene.text.Font?>
 
 <?import fr.lesaffrefreres.rh.minibodet.view.CalendarView?>
+<?import fr.lesaffrefreres.rh.minibodet.view.EmployeeCalendarView?>
+<?import fr.lesaffrefreres.rh.minibodet.view.LabelView?>
 <?import fr.lesaffrefreres.rh.minibodet.view.EmployeeView?>
-<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
-  <tabs>
+<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="800.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/18">
     <Tab fx:id="tab_calendar" text="Calendrier">
-         <content>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <CalendarView fx:id="calendar"/>
-               </children>
-            </HBox>
-         </content></Tab>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <CalendarView fx:id="calendar"/>
+        </HBox>
+    </Tab>
     <Tab fx:id="tab_employee" text="Employés">
-         <content>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <CalendarView fx:id="calendar_employee"/>
-                  <EmployeeView fx:id="employee_view" calendar="calendar_employee"/>
-               </children>
-            </HBox>
-         </content></Tab>
-      <Tab text="Paramètres" />
-      <Tab text="Exportation" />
-  </tabs>
+        <HBox prefHeight="800.0" prefWidth="1200.0">
+            <CalendarView fx:id="calendar_employee"/>
+            <EmployeeCalendarView fx:id="employee_view" calendar="calendar_employee"/>
+        </HBox>
+    </Tab>
+    <Tab fx:id="tab_param" text="Paramètres">
+        <HBox prefHeight="800.0" prefWidth="1200.0">
+            <LabelView />
+            <EmployeeView />
+        </HBox>
+    </Tab>
+    <Tab fx:id="tab_export" text="Exportation"/>
 </TabPane>

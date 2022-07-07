@@ -1,8 +1,13 @@
 package fr.lesaffrefreres.rh.minibodet.model;
 
+import fr.lesaffrefreres.rh.minibodet.controller.extractor.DayLabelExtractor;
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import org.apache.ibatis.jdbc.SQL;
 
 import java.sql.*;
@@ -12,99 +17,6 @@ import java.util.Objects;
 
 public class SQLDayLabelManager implements DayLabelManager {
 
-    private static final class SQLDayLabel extends DayLabel {
-
-        private long idLabel;
-
-        public SQLDayLabel(String txt, Color c) {
-            super(txt, c);
-            Connection conn= DataBase.getInstance().getConnection();
-            try {
-                PreparedStatement ps = conn.prepareStatement(
-                        "INSERT INTO LABEL(LABEL_COLOR, LABEL_TEXT) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
-                ps.setString(1, SQLDayLabelManager.toRGBCode(c));
-                ps.setString(2, txt);
-                ps.execute();
-                ResultSet rs = ps.getGeneratedKeys();
-                rs.first();
-                idLabel = rs.getLong(1);
-                ps.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-        public SQLDayLabel(long idl) {
-            super("", Color.ALICEBLUE); // default value, will never be
-            idLabel = idl;
-            updateBuffer();
-        }
-
-        public void updateBuffer() {
-            Connection conn = DataBase.getInstance().getConnection();
-            try {
-                PreparedStatement ps = conn.prepareStatement(
-                        "SELECT LABEL_TEXT, LABEL_COLOR FROM LABEL WHERE LABEL_ID = ?");
-                ps.setLong(1, idLabel);
-                ResultSet rs = ps.executeQuery();
-                if(rs.first()) {
-                    text = rs.getString(1);
-                    color = Color.web(rs.getString(2));
-                } else {
-                    ps.close();
-                    throw new IllegalArgumentException("given id doesn't exist in DB");
-                }
-                ps.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-        public long getId() {
-            return idLabel;
-        }
-
-        public void setColor(Color c) {
-            color = c;
-            Connection conn = DataBase.getInstance().getConnection();
-            try {
-                PreparedStatement ps = conn.prepareStatement(
-                        "UPDATE LABEL SET LABEL_COLOR = ? WHERE LABEL_ID = ?;");
-                ps.setString(1, SQLDayLabelManager.toRGBCode(c));
-                ps.setLong(2, idLabel);
-                ps.executeUpdate();
-                ps.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-        public void setText(String txt) {
-            text = txt;
-            Connection conn= DataBase.getInstance().getConnection();
-            try {
-                PreparedStatement ps = conn.prepareStatement(
-                        "UPDATE LABEL SET LABEL_TEXT = ? WHERE LABEL_ID = ?;");
-                ps.setString(1, txt);
-                ps.setLong(2, idLabel);
-                ps.executeUpdate();
-                ps.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
-
-
-    }
-
-    private static String toRGBCode( Color color )
-    {
-        return String.format( "#%02X%02X%02X",
-                (int)( color.getRed() * 255 ),
-                (int)( color.getGreen() * 255 ),
-                (int)( color.getBlue() * 255 ) );
-    }
-
     private static SQLDayLabelManager instance;
 
     private static ObservableList<DayLabel> labels;
@@ -112,7 +24,7 @@ public class SQLDayLabelManager implements DayLabelManager {
     private static long idUndefined;
 
     protected SQLDayLabelManager() {
-        labels = FXCollections.observableArrayList();
+        labels = FXCollections.observableArrayList(new DayLabelExtractor());
         Connection conn = DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
@@ -188,14 +100,14 @@ public class SQLDayLabelManager implements DayLabelManager {
     }
 
     @Override
-    public void setDayLabelText(int id, String txt) {
+    public void setDayLabelText(long id, String txt) {
         Objects.requireNonNull(txt);
         SQLDayLabel sdl = (SQLDayLabel) getDayLabelById(id);
         sdl.setText(txt);
     }
 
     @Override
-    public void setDayLabelColor(int id, Color c) {
+    public void setDayLabelColor(long id, Color c) {
         Objects.requireNonNull(c);
         SQLDayLabel sdl = (SQLDayLabel) getDayLabelById(id);
         sdl.setColor(c);
@@ -225,13 +137,17 @@ public class SQLDayLabelManager implements DayLabelManager {
         return containsDayLabel(id);
     }
 
+    public boolean labelExist(String name) {
+        return containsDayLabel(name);
+    }
+
     @Override
     public List<DayLabel> getAllDayLabels() {
         return Collections.unmodifiableList(labels);
     }
 
     public ObservableList<DayLabel> getLabelsObservableList() {
-        return FXCollections.unmodifiableObservableList(labels);
+        return labels;
     }
 
     @Override

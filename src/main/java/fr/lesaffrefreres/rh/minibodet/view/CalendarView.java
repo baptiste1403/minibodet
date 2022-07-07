@@ -159,8 +159,6 @@ public class CalendarView extends AnchorPane {
 
         labeLPicker.setOnAction(new StatusListPickerListener(this));
 
-        SQLDayLabelManager.getInstance().getLabelsObservableList().addListener(labeLPicker);
-
         ResourceBundle bundle = ResourceBundle.getBundle("/strings", new Locale("fr", "FR"));
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "/calendar-view.fxml"), bundle);

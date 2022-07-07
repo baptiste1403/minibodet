@@ -1,9 +1,8 @@
 package fr.lesaffrefreres.rh.minibodet.controller;
 
 import fr.lesaffrefreres.rh.minibodet.model.Employee;
-import fr.lesaffrefreres.rh.minibodet.model.SimpleEmployee;
 import fr.lesaffrefreres.rh.minibodet.view.CalendarView;
-import fr.lesaffrefreres.rh.minibodet.view.EmployeeView;
+import fr.lesaffrefreres.rh.minibodet.view.EmployeeCalendarView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
@@ -11,17 +10,16 @@ import javafx.scene.control.ChoiceBox;
 public class EmployeeListChangeListener implements EventHandler<ActionEvent> {
 
     private CalendarView calendar;
-    private EmployeeView employeeView;
+    private EmployeeCalendarView employeeCalendarView;
 
-    public EmployeeListChangeListener(CalendarView cv, EmployeeView ev) {
+    public EmployeeListChangeListener(CalendarView cv, EmployeeCalendarView ev) {
         calendar = cv;
-        employeeView = ev;
+        employeeCalendarView = ev;
     }
 
     @Override
     public void handle(ActionEvent event) {
         ChoiceBox<Employee> cb = (ChoiceBox<Employee>) event.getSource();
         calendar.setCalendar(cb.getValue().getCalendar());
-        employeeView.update();
     }
 }

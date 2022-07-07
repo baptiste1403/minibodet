@@ -9,6 +9,7 @@ module fr.lesaffrefreres.rh.minibodet {
 
     opens fr.lesaffrefreres.rh.minibodet to javafx.fxml;
     opens fr.lesaffrefreres.rh.minibodet.view to javafx.fxml;
+    opens fr.lesaffrefreres.rh.minibodet.controller to javafx.fxml;
     exports fr.lesaffrefreres.rh.minibodet;
     exports fr.lesaffrefreres.rh.minibodet.view;
 }
