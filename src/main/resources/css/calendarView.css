@@ -1,0 +1,44 @@
+.grid-container {
+    -fx-margin : 20 20 20 20;
+}
+
+.grid-title {
+    -fx-background-color : #334b93;
+    -fx-text-fill : white;
+}
+
+.grid-title-selected {
+    -fx-background-color: #1b0656;
+}
+
+.grid-element {
+    -fx-text-align: center;
+    /*-fx-border-style: solid solid solid solid;
+    -fx-border-color: black black black black;
+    -fx-border-width: 1 0.5 1 0.5;*/
+}
+
+.grid-element-disabled {
+    -fx-background-color: #cccccc;
+    -fx-text-align: center;
+    -fx-disabled: true;
+}
+
+.grid-element-selected {
+    -fx-text-align: center;
+    -fx-border-style: dashed  dashed  dashed  dashed;
+    -fx-border-color: black black black black;
+    -fx-border-width: 2;
+}
+
+.grid-content {
+    -fx-background-color: blue;
+}
+
+.grid-left {
+    -fx-background-color: red;
+}
+
+.grid-top {
+    -fx-background-color: green;
+}

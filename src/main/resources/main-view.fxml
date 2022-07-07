@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import fr.lesaffrefreres.rh.minibodet.view.CalendarView?>
+<?import fr.lesaffrefreres.rh.minibodet.view.EmployeeView?>
+<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+  <tabs>
+    <Tab fx:id="tab_calendar" text="Calendrier">
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <CalendarView fx:id="calendar"/>
+               </children>
+            </HBox>
+         </content></Tab>
+    <Tab fx:id="tab_employee" text="Employés">
+         <content>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <CalendarView fx:id="calendar_employee"/>
+                  <EmployeeView fx:id="employee_view" calendar="calendar_employee"/>
+               </children>
+            </HBox>
+         </content></Tab>
+      <Tab text="Paramètres" />
+      <Tab text="Exportation" />
+  </tabs>
+</TabPane>
