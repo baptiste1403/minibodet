@@ -15,25 +15,37 @@
 <?import fr.lesaffrefreres.rh.minibodet.view.EmployeeCalendarView?>
 <?import fr.lesaffrefreres.rh.minibodet.view.LabelView?>
 <?import fr.lesaffrefreres.rh.minibodet.view.EmployeeView?>
-<TabPane fx:id="tabs" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         prefHeight="800.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1"
+<?import fr.lesaffrefreres.rh.minibodet.view.ImportExportView?>
+<?import fr.lesaffrefreres.rh.minibodet.view.EmployeeArchiveView?>
+<?import fr.lesaffrefreres.rh.minibodet.view.AboutView?>
+<TabPane fx:id="tabs" maxHeight="Infinity" maxWidth="Infinity" minHeight="800.0" minWidth="1200.0" prefWidth="1200" prefHeight="800"
+         tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1"
          xmlns="http://javafx.com/javafx/18">
     <Tab fx:id="tab_calendar" text="Calendrier">
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox alignment="TOP_CENTER">
             <CalendarView fx:id="calendar"/>
         </HBox>
     </Tab>
     <Tab fx:id="tab_employee" text="Employés">
-        <HBox prefHeight="800.0" prefWidth="1200.0">
-            <CalendarView fx:id="calendar_employee"/>
-            <EmployeeCalendarView fx:id="employee_view" calendar="calendar_employee"/>
+        <HBox fx:id="tab_employee_container">
+            <EmployeeCalendarView fx:id="employee_view"/>
         </HBox>
     </Tab>
     <Tab fx:id="tab_param" text="Paramètres">
-        <HBox prefHeight="800.0" prefWidth="1200.0">
+        <HBox>
             <LabelView />
             <EmployeeView />
+            <EmployeeArchiveView />
         </HBox>
     </Tab>
-    <Tab fx:id="tab_export" text="Exportation"/>
+    <Tab fx:id="tab_export" text="import/export">
+        <HBox prefHeight="800.0" prefWidth="1200.0">
+            <ImportExportView />
+        </HBox>
+    </Tab>
+    <Tab fx:id="tab_docs" text="manuel">
+        <HBox prefHeight="800.0" prefWidth="1200.0">
+            <AboutView fx:id="aboutView"/>
+        </HBox>
+    </Tab>
 </TabPane>

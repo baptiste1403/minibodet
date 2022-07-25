@@ -40,6 +40,11 @@ dependencies {
     implementation group: 'com.h2database', name: 'h2', version: '2.1.214'
     implementation group: 'net.harawata', name: 'appdirs', version: '1.2.1'
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.10'
+    implementation 'org.apache.poi:poi-ooxml:5.2.2'
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.2'
+    implementation('net.synedra:validatorfx:0.3.1') {
+        exclude(group: 'org.openjfx')
+    }
 }
 
 test {
@@ -55,7 +60,7 @@ jlink {
     }
     jpackage {
         installerOptions = [
-                '--copyright', 'Copyrigth 2015-2019 WALCZAK.IT'
+                '--copyright', 'Copyrigth 2021-2022 LESAFFREFRERES.FR'
         ]
         installerType = project.findProperty('installerType') // we will pass this from the command line (example: -PinstallerType=msi)
         if (installerType == 'msi') {

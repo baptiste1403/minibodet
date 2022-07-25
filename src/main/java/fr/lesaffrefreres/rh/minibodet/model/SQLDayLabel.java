@@ -7,6 +7,14 @@ import javafx.scene.paint.Color;
 
 import java.sql.*;
 
+/**
+ * This class represents a persistent implementation of a day label.
+ * This class is usually and must be used only by the {@link SQLDayLabelManager}
+ *
+ * @author lesaffrefreres
+ * @version 1.0
+ * @since 1.0
+ */
 public class SQLDayLabel implements DayLabel {
 
     private long idLabel;
@@ -15,6 +23,12 @@ public class SQLDayLabel implements DayLabel {
 
     private Color color;
 
+    /**
+     * Creates a new SQLDayLabel that does not exist in the database, and inserts it in the database.
+     * the id of the label is set to the id of the newly created label.
+     * @param txt the text of the label
+     * @param c the color of the label
+     */
     public SQLDayLabel(String txt, Color c) {
         color = c;
         text = new SimpleStringProperty();
@@ -23,7 +37,7 @@ public class SQLDayLabel implements DayLabel {
         Connection conn= DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "INSERT INTO LABEL(LABEL_COLOR, LABEL_TEXT) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
+                    "INSERT INTO LABEL(COLOR, TEXT) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, ColorHelper.toRGBCode(c));
             ps.setString(2, txt);
             ps.execute();
@@ -36,17 +50,24 @@ public class SQLDayLabel implements DayLabel {
         }
     }
 
+    /**
+     * Creates a new SQLDayLabel that exists in the database, and loads it from the database.
+     * @param idl the id of the label in the database
+     */
     public SQLDayLabel(long idl) {
         idLabel = idl;
         text = new SimpleStringProperty();
         updateBuffer();
     }
 
+    /**
+     * Updates the buffer of the label with the data from the database.
+     */
     public void updateBuffer() {
         Connection conn = DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "SELECT LABEL_TEXT, LABEL_COLOR FROM LABEL WHERE LABEL_ID = ?");
+                    "SELECT TEXT, COLOR FROM LABEL WHERE ID_LABEL = ?");
             ps.setLong(1, idLabel);
             ResultSet rs = ps.executeQuery();
             if(rs.first()) {
@@ -62,16 +83,24 @@ public class SQLDayLabel implements DayLabel {
         }
     }
 
+    /**
+     * Return the id of the label in the database.
+     * @return the id of the label in the database.
+     */
     public long getId() {
         return idLabel;
     }
 
+    /**
+     * Set the color of the label.
+     * @param c the color of the label
+     */
     public void setColor(Color c) {
         color = c;
         Connection conn = DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "UPDATE LABEL SET LABEL_COLOR = ? WHERE LABEL_ID = ?;");
+                    "UPDATE LABEL SET COLOR = ? WHERE ID_LABEL = ?;");
             ps.setString(1, ColorHelper.toRGBCode(c));
             ps.setLong(2, idLabel);
             ps.executeUpdate();
@@ -81,12 +110,16 @@ public class SQLDayLabel implements DayLabel {
         }
     }
 
+    /**
+     * Set the text of the label.
+     * @param txt the text of the label
+     */
     public void setText(String txt) {
         text.set(txt);
         Connection conn= DataBase.getInstance().getConnection();
         try {
             PreparedStatement ps = conn.prepareStatement(
-                    "UPDATE LABEL SET LABEL_TEXT = ? WHERE LABEL_ID = ?;");
+                    "UPDATE LABEL SET TEXT = ? WHERE ID_LABEL = ?;");
             ps.setString(1, txt);
             ps.setLong(2, idLabel);
             ps.executeUpdate();
@@ -96,16 +129,28 @@ public class SQLDayLabel implements DayLabel {
         }
     }
 
+    /**
+     * Return the text of the label.
+     * @return the text of the label.
+     */
     @Override
     public String getText() {
         return text.get();
     }
 
+    /**
+     * Return the textProperty of the label.
+     * @return the textProperty of the label.
+     */
     @Override
     public StringProperty textProperty() {
         return text;
     }
 
+    /**
+     * Return the color of the label.
+     * @return the color of the label.
+     */
     @Override
     public Color getColor() {
         return color;

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<?import java.util.ArrayList?>
+<fx:root fx:id="root" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="400.0" prefWidth="600.0" type="VBox" xmlns="http://javafx.com/javafx/18"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.lesaffrefreres.rh.minibodet.controller.PopupPlanningViewController">
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </VBox.margin>
+        <Spinner fx:id="planningSpinnerTotalHours1" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" editable="true">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerTotalHours2" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" editable="true">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerTotalHours3" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.rowIndex="2" editable="true">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerTotalHours4" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.rowIndex="3" editable="true">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerTotalHours5" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.rowIndex="4" editable="true">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerTotalHours6" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.rowIndex="5" editable="true">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <fx:define>
+            <ArrayList fx:id="totalHoursSpinnerList">
+                <fx:reference source="planningSpinnerTotalHours1"/>
+                <fx:reference source="planningSpinnerTotalHours2"/>
+                <fx:reference source="planningSpinnerTotalHours3"/>
+                <fx:reference source="planningSpinnerTotalHours4"/>
+                <fx:reference source="planningSpinnerTotalHours5"/>
+                <fx:reference source="planningSpinnerTotalHours6"/>
+            </ArrayList>
+        </fx:define>
+        <Spinner fx:id="planningSpinnerNightHours1" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.columnIndex="1">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerNightHours2" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerNightHours3" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerNightHours4" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerNightHours5" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <Spinner fx:id="planningSpinnerNightHours6" maxHeight="1.7976931348623157E308"
+                 maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </Spinner>
+        <fx:define>
+            <ArrayList fx:id="nightHoursSpinnerList">
+                <fx:reference source="planningSpinnerNightHours1"/>
+                <fx:reference source="planningSpinnerNightHours2"/>
+                <fx:reference source="planningSpinnerNightHours3"/>
+                <fx:reference source="planningSpinnerNightHours4"/>
+                <fx:reference source="planningSpinnerNightHours5"/>
+                <fx:reference source="planningSpinnerNightHours6"/>
+            </ArrayList>
+        </fx:define>
+        <ComboBox fx:id="planningLabelComboBox1" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="2">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </ComboBox>
+        <ComboBox fx:id="planningLabelComboBox2" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </ComboBox>
+        <ComboBox fx:id="planningLabelComboBox3" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </ComboBox>
+        <ComboBox fx:id="planningLabelComboBox4" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </ComboBox>
+        <ComboBox fx:id="planningLabelComboBox5" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </ComboBox>
+        <ComboBox fx:id="planningLabelComboBox6" maxHeight="1.7976931348623157E308"
+                  maxWidth="1.7976931348623157E308" prefWidth="150.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="5">
+            <GridPane.margin>
+                <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+            </GridPane.margin>
+        </ComboBox>
+        <fx:define>
+            <ArrayList fx:id="labelComboBoxList">
+                <fx:reference source="planningLabelComboBox1"/>
+                <fx:reference source="planningLabelComboBox2"/>
+                <fx:reference source="planningLabelComboBox3"/>
+                <fx:reference source="planningLabelComboBox4"/>
+                <fx:reference source="planningLabelComboBox5"/>
+                <fx:reference source="planningLabelComboBox6"/>
+            </ArrayList>
+        </fx:define>
+    </GridPane>
+    <Button fx:id="validationButton" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Valider" onAction="#onButtonValidatePlanningClicked">
+        <font>
+          <Font size="18.0"/>
+        </font>
+    </Button>
+</fx:root>

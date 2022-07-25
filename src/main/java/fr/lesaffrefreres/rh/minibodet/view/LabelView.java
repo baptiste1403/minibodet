@@ -1,14 +1,13 @@
 package fr.lesaffrefreres.rh.minibodet.view;
 
+import fr.lesaffrefreres.rh.minibodet.controller.EmployeeViewController;
 import fr.lesaffrefreres.rh.minibodet.controller.LabelViewController;
 import fr.lesaffrefreres.rh.minibodet.model.DayLabel;
-import fr.lesaffrefreres.rh.minibodet.model.DayLabelManager;
 import fr.lesaffrefreres.rh.minibodet.model.SQLDayLabelManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -18,11 +17,23 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LabelView extends VBox implements ChangeListener<Scene> {
+/**
+ * This class represents the view of the label view.
+ *
+ * @author lesaffrefreres
+ * @version 1.0
+ * @since 1.0
+ */
+public class LabelView extends VBox {
 
+    private final LabelViewController controller;
+
+    /**
+     * Load the view from the FXML file.
+     */
     public LabelView() {
         ResourceBundle bundle = ResourceBundle.getBundle("/strings", new Locale("fr", "FR"));
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/label-view.fxml"), bundle);
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/label-view.fxml"), bundle);
         fxmlLoader.setRoot(this);
 
         try {
@@ -31,25 +42,10 @@ public class LabelView extends VBox implements ChangeListener<Scene> {
             throw new RuntimeException(exception);
         }
 
-        sceneProperty().addListener(this);
+        controller = fxmlLoader.getController();
     }
 
-    public void setup() {
-        SQLDayLabelManager dlm = SQLDayLabelManager.getInstance();
-
-        ComboBox<DayLabel> cb = (ComboBox<DayLabel>) this.lookup("#paramLabelPicker");
-        cb.setItems(dlm.getLabelsObservableList());
-        cb.getSelectionModel().select(dlm.getDayLabelById(dlm.getUndefinedDayLabelId()));
-
-        TextField tf = (TextField) this.lookup("#paramLabelTextInput");
-        tf.setText(cb.getValue().getText());
-
-        ColorPicker cp = (ColorPicker) this.lookup("#paramLabelColorPicker");
-        cp.setValue(cb.getValue().getColor());
-    }
-
-    @Override
-    public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
-        setup();
+    public void setEmployeeController(EmployeeViewController evc) {
+        controller.setEmployeeController(evc);
     }
 }

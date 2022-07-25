@@ -13,9 +13,10 @@
 
 .grid-element {
     -fx-text-align: center;
-    /*-fx-border-style: solid solid solid solid;
+    -fx-border-style: solid solid solid solid;
     -fx-border-color: black black black black;
-    -fx-border-width: 1 0.5 1 0.5;*/
+    -fx-border-width: 1;
+    -fx-padding: 0 0 0 20;
 }
 
 .grid-element-disabled {
@@ -24,12 +25,38 @@
     -fx-disabled: true;
 }
 
-.grid-element-selected {
+.grid-element-selected-alone {
     -fx-text-align: center;
     -fx-border-style: dashed  dashed  dashed  dashed;
     -fx-border-color: black black black black;
-    -fx-border-width: 2;
+    -fx-border-width: 1;
+    -fx-padding: 0 0 0 20;
 }
+
+.grid-element-selected-top {
+    -fx-text-align: center;
+    -fx-border-style: dashed  dashed  dashed  dashed;
+    -fx-border-color: black black transparent  black;
+    -fx-border-width: 1;
+    -fx-padding: 0 0 0 20;
+}
+
+.grid-element-selected-bottom {
+    -fx-text-align: center;
+    -fx-border-style: dashed  dashed  dashed  dashed;
+    -fx-border-color: transparent  black black black;
+    -fx-border-width: 1;
+    -fx-padding: 0 0 0 20;
+}
+
+.grid-element-selected-middle {
+    -fx-text-align: center;
+    -fx-border-style: dashed  dashed  dashed  dashed;
+    -fx-border-color: transparent  black transparent  black;
+    -fx-border-width: 1;
+    -fx-padding: 0 0 0 20;
+}
+
 
 .grid-content {
     -fx-background-color: blue;
